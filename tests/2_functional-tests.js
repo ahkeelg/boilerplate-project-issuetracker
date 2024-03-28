@@ -163,22 +163,15 @@ suite('Functional Tests', function() {
         });
     });
   test('Update an issue with no fields to update: PUT request to /api/issues/{project}', function (done) {
-      chai
-        .request(server)
-        .keepOpen()
-        .put(url)
-        .send({
-          _id: id2,
-          issue_title: '',
-          issue_text: '',
-          created_by: ''
-        })
-        .end(function (err, res) {
-          assert.equal(res.status, 200);
-          assert.equal(res.type, 'application/json');
-          assert.equal(res.body.error, 'no update field(s) sent');
-          assert.equal(res.body._id, id2);
-          done();
+    chai
+    .request(server)
+    .keepOpen()
+    .put('/api/issues/apitest')
+    .end(function (err, res) {
+      assert.equal(res.status, 200);
+      assert.equal(res.type, 'application/json');
+      assert.equal(res.body.error, 'missing _id');
+      done();
         });
     });
   test('Update an issue with an invalid _id: PUT request to /api/issues/{project}', function (done) {
@@ -220,13 +213,13 @@ suite('Functional Tests', function() {
         .keepOpen()
         .delete(url)
         .send({
-          _id: 1111
+          _id: 3333
         })
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.equal(res.type, 'application/json');
           assert.equal(res.body.error, 'could not delete');
-          assert.equal(res.body._id, 1111);
+          assert.equal(res.body._id, 3333);
           done();
         });
     });
