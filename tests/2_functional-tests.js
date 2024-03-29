@@ -191,7 +191,7 @@ suite('Functional Tests', function() {
           done();
         });
     });
-  test('Delete an issue: DELETE request to /api/issues/{project}', function (done) {
+    test('Delete an issue: DELETE request to /api/issues/{project}', function (done) {
       chai
         .request(server)
         .keepOpen()
@@ -213,13 +213,13 @@ suite('Functional Tests', function() {
         .keepOpen()
         .delete(url)
         .send({
-          _id: 3333
+          _id: 1111
         })
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.equal(res.type, 'application/json');
           assert.equal(res.body.error, 'could not delete');
-          assert.equal(res.body._id, 3333);
+          assert.equal(res.body._id, 1111);
           done();
         });
     });
